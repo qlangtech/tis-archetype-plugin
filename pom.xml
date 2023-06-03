@@ -22,8 +22,14 @@
         <rat.skip>true</rat.skip>
         <checkstyle.skip>true</checkstyle.skip>
         <mavenVersion>3.0</mavenVersion>
+        <tis.version>3.7.2</tis.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.qlangtech.tis</groupId>
+            <artifactId>tis-plugin</artifactId>
+            <version>${tis.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>

@@ -1,7 +1,1 @@
-mvn archetype:generate                                  \
-  -DarchetypeGroupId=com.qlangtech.tis                  \
-  -DarchetypeArtifactId=tis-archetype-plugin          \
-  -DarchetypeVersion=1.0-SNAPSHOT                \
-  -DgroupId=com.qlangtech.tis                       \
-  -DartifactId=tis-datax-xxx \
-  -DextendClass=Test
+mvn com.qlangtech.tis:tis-archetype-plugin:generate -Drat.skip=true  -Dtis.version=3.7.1
