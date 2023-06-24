@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tis-archetype-plugin</artifactId>
+        <groupId>com.qlangtech.tis</groupId>
+        <version>3.8.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tis-archetype-run-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qlangtech.tis</groupId>
+            <artifactId>tis-manage-pojo</artifactId>
+            <version>${tis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qlangtech.tis</groupId>
+            <artifactId>tis-archetype-common</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+
+</project>

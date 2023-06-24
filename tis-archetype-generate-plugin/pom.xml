@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>com.qlangtech.tis</groupId>
+        <artifactId>tis-archetype-plugin</artifactId>
+        <version>3.8.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+<!--    <groupId>com.qlangtech.tis</groupId>-->
+    <artifactId>tis-archetype-generate-plugin</artifactId>
+<!--    <version>3.7.2</version>-->
+    <url>http://maven.apache.org</url>
+    <packaging>maven-plugin</packaging>
+
+
+<!--    <properties>-->
+<!--        <javaVersion>8</javaVersion>-->
+<!--        <rat.skip>true</rat.skip>-->
+<!--        <checkstyle.skip>true</checkstyle.skip>-->
+<!--        <mavenVersion>3.0</mavenVersion>-->
+<!--        <tis.version>${project.version}</tis.version>-->
+<!--    </properties>-->
+    <dependencies>
+        <dependency>
+            <groupId>com.qlangtech.tis</groupId>
+            <artifactId>tis-plugin</artifactId>
+            <version>${tis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qlangtech.tis</groupId>
+            <artifactId>tis-archetype-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+
+    </build>
+
+</project>

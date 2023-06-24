@@ -9,25 +9,42 @@
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-parent</artifactId>
         <version>34</version>
-        <relativePath />
+        <relativePath/>
     </parent>
+
+    <modules>
+        <module>tis-archetype-run-plugin</module>
+        <module>tis-archetype-generate-plugin</module>
+        <module>tis-archetype-common</module>
+    </modules>
 
     <groupId>com.qlangtech.tis</groupId>
     <artifactId>tis-archetype-plugin</artifactId>
-    <version>3.2.1</version>
+    <version>3.8.0</version>
+
+
     <url>http://maven.apache.org</url>
-    <packaging>maven-plugin</packaging>
+    <!--    <packaging>maven-plugin</packaging>-->
+    <packaging>pom</packaging>
+
 
     <properties>
+        <javaVersion>8</javaVersion>
         <rat.skip>true</rat.skip>
         <checkstyle.skip>true</checkstyle.skip>
         <mavenVersion>3.0</mavenVersion>
-        <tis.version>3.7.2</tis.version>
+        <tis.version>${project.version}</tis.version>
+        <maven.plugin.version>3.2.1</maven.plugin.version>
     </properties>
     <dependencies>
+        <!--        <dependency>-->
+        <!--            <groupId>com.qlangtech.tis</groupId>-->
+        <!--            <artifactId>tis-plugin</artifactId>-->
+        <!--            <version>${tis.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.qlangtech.tis</groupId>
-            <artifactId>tis-plugin</artifactId>
+            <artifactId>tis-web-start</artifactId>
             <version>${tis.version}</version>
         </dependency>
         <dependency>
@@ -63,18 +80,18 @@
             </exclusions>
         </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven.archetype</groupId>-->
+        <!--            <artifactId>archetype-catalog</artifactId>-->
+        <!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>org.apache.maven.archetype</groupId>-->
-<!--            <artifactId>archetype-catalog</artifactId>-->
+<!--            <artifactId>archetype-descriptor</artifactId>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.apache.maven.archetype</groupId>
-            <artifactId>archetype-descriptor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.archetype</groupId>
-            <artifactId>archetype-common</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.maven.archetype</groupId>-->
+<!--            <artifactId>archetype-common</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-archiver</artifactId>
@@ -86,11 +103,11 @@
             <version>4.2.2</version>
         </dependency>
         <!-- Required for the integration tests, dependency is only to define build order -->
-        <dependency>
-            <groupId>org.apache.maven.archetype</groupId>
-            <artifactId>archetype-packaging</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.maven.archetype</groupId>-->
+<!--            <artifactId>archetype-packaging</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
@@ -118,19 +135,7 @@
             <groupId>org.apache.maven.shared</groupId>
             <artifactId>maven-artifact-transfer</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-velocity</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
@@ -152,27 +157,34 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.qlangtech.tis</groupId>
+                <artifactId>tis-archetype-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-compat</artifactId>
                 <version>${mavenVersion}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-descriptor</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-packaging</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.apache.maven.archetype</groupId>-->
+<!--                <artifactId>archetype-descriptor</artifactId>-->
+<!--                <version>${maven.plugin.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.maven.archetype</groupId>-->
+<!--                <artifactId>archetype-common</artifactId>-->
+<!--                <version>${maven.plugin.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.maven.archetype</groupId>-->
+<!--                <artifactId>archetype-packaging</artifactId>-->
+<!--                <version>${maven.plugin.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-artifact</artifactId>
@@ -320,9 +332,20 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>oss://maven.qlangtech.com/release</url>
+        </repository>
+    </distributionManagement>
     <build>
-
+        <extensions>
+            <extension>
+                <groupId>com.qlangtech.maven.cloud</groupId>
+                <artifactId>oss-storage-wagon</artifactId>
+                <version>2.3</version>
+            </extension>
+        </extensions>
     </build>
 
 </project>
