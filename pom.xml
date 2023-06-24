@@ -20,7 +20,7 @@
 
     <groupId>com.qlangtech.tis</groupId>
     <artifactId>tis-archetype-plugin</artifactId>
-    <version>3.8.0</version>
+    <version>${revision}</version>
 
 
     <url>http://maven.apache.org</url>
@@ -33,8 +33,8 @@
         <rat.skip>true</rat.skip>
         <checkstyle.skip>true</checkstyle.skip>
         <mavenVersion>3.0</mavenVersion>
-        <tis.version>${project.version}</tis.version>
         <maven.plugin.version>3.2.1</maven.plugin.version>
+        <revision>3.8.0</revision>
     </properties>
     <dependencies>
         <!--        <dependency>-->
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.qlangtech.tis</groupId>
             <artifactId>tis-web-start</artifactId>
-            <version>${tis.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -84,14 +84,14 @@
         <!--            <groupId>org.apache.maven.archetype</groupId>-->
         <!--            <artifactId>archetype-catalog</artifactId>-->
         <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.maven.archetype</groupId>-->
-<!--            <artifactId>archetype-descriptor</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.maven.archetype</groupId>-->
-<!--            <artifactId>archetype-common</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven.archetype</groupId>-->
+        <!--            <artifactId>archetype-descriptor</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven.archetype</groupId>-->
+        <!--            <artifactId>archetype-common</artifactId>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-archiver</artifactId>
@@ -103,11 +103,11 @@
             <version>4.2.2</version>
         </dependency>
         <!-- Required for the integration tests, dependency is only to define build order -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.maven.archetype</groupId>-->
-<!--            <artifactId>archetype-packaging</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven.archetype</groupId>-->
+        <!--            <artifactId>archetype-packaging</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
@@ -170,21 +170,21 @@
                 <version>${mavenVersion}</version>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>org.apache.maven.archetype</groupId>-->
-<!--                <artifactId>archetype-descriptor</artifactId>-->
-<!--                <version>${maven.plugin.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.maven.archetype</groupId>-->
-<!--                <artifactId>archetype-common</artifactId>-->
-<!--                <version>${maven.plugin.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.maven.archetype</groupId>-->
-<!--                <artifactId>archetype-packaging</artifactId>-->
-<!--                <version>${maven.plugin.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.maven.archetype</groupId>-->
+            <!--                <artifactId>archetype-descriptor</artifactId>-->
+            <!--                <version>${maven.plugin.version}</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.maven.archetype</groupId>-->
+            <!--                <artifactId>archetype-common</artifactId>-->
+            <!--                <version>${maven.plugin.version}</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.maven.archetype</groupId>-->
+            <!--                <artifactId>archetype-packaging</artifactId>-->
+            <!--                <version>${maven.plugin.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-artifact</artifactId>
@@ -346,6 +346,33 @@
                 <version>2.3</version>
             </extension>
         </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>tis-archetype-plugin</artifactId>
         <groupId>com.qlangtech.tis</groupId>
-        <version>3.8.0</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.qlangtech.tis</groupId>
             <artifactId>tis-manage-pojo</artifactId>
-            <version>${tis.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
