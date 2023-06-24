@@ -78,7 +78,7 @@
             <plugin>
                 <groupId>com.qlangtech.tis</groupId>
                 <artifactId>tis-archetype-run-plugin</artifactId>
-                <version>3.7.2</version>
+                <version>${project.version}</version>
             </plugin>
         </plugins>
     </build>
