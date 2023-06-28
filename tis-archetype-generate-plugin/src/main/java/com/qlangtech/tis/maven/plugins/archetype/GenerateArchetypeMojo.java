@@ -38,12 +38,10 @@ import com.qlangtech.tis.extension.model.UpdateCenter;
 import com.qlangtech.tis.extension.model.UpdateCenterResource;
 import com.qlangtech.tis.extension.model.UpdateSite;
 import com.qlangtech.tis.extension.model.UpdateSite.Plugin;
-import com.qlangtech.tis.manage.common.Config;
 import com.qlangtech.tis.manage.common.ConfigFileContext.StreamProcess;
 import com.qlangtech.tis.manage.common.HttpUtils;
 import com.qlangtech.tis.manage.common.TisUTF8;
 import com.qlangtech.tis.plugin.PluginCategory;
-import com.qlangtech.tis.pubhook.common.RunEnvironment;
 
 //import org.codehaus.plexus.component.annotations.Component;
 
@@ -186,9 +184,10 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
             // System.out.println(vwriter.toString());
             // 确定工程名称
 
+            FileUtils.write(new File(distDir, "src/test/java/TestAll.java"), vwriter.toString(), TisUTF8.get());
             // pom.xml
-
-
+            final String resourcePath = "src/main/resources/";
+            FileUtils.write(new File(distDir, resourcePath+"description.md"), "Add Plugin Description", TisUTF8.get());
             // 生成 Java类目
 
             for (ExtendPlugin extend : extendPlugins) {
@@ -210,9 +209,9 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                 FileUtils.write(new File(distDir, "src/test/java/" + newTestClassInfo.getFullClazzRelativePath()), vwriter.toString(), TisUTF8.get());
 
                 // 生成props json
-                FileUtils.write(new File(distDir, "src/main/resources/" + newClassInfo.getFullRelativePath("json")), "{\n}", TisUTF8.get());
+                FileUtils.write(new File(distDir, resourcePath + newClassInfo.getFullRelativePath("json")), "{\n}", TisUTF8.get());
                 // 生成props md
-                FileUtils.write(new File(distDir, "src/main/resources/" + newClassInfo.getFullRelativePath("md")), "", TisUTF8.get());
+                FileUtils.write(new File(distDir, resourcePath + newClassInfo.getFullRelativePath("md")), "", TisUTF8.get());
             }
 
             // 生成 Resources文件
@@ -227,7 +226,6 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
 //        }
 
     }
-
 
 
 //    public static final String UBER_DATA_DIR = "uber-data";

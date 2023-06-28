@@ -37,6 +37,9 @@ public class TISRunMojo extends AbstractMojo {
     @Parameter(property = "tis.version", required = true)
     public String tisVersion;
 
+    @Parameter(property = "tis.port", required = false)
+    public String tisRunPort;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         ArchetypeCommon.initSysParams();
@@ -57,8 +60,10 @@ public class TISRunMojo extends AbstractMojo {
                 , new SubContext("tis-data.tar.gz", "../" + ArchetypeCommon.UBER_DATA_DIR))) {
             initPreDependencyRes.downloads(pkgName);
         }
-
-
+        if (StringUtils.isNotBlank(tisRunPort)) {
+            System.setProperty(TisAppLaunch.KEY_TIS_LAUNCH_PORT, String.valueOf(Integer.parseInt(tisRunPort)));
+            this.getLog().info("reset the http launch port:" + tisRunPort);
+        }
         TisAppLaunch.get().setRunMode(TisRunMode.Standalone);
         try {
             TisApp.launchTISApp(createParentClassloader(), new String[]{});
