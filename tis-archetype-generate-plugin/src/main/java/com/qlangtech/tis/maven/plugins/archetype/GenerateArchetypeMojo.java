@@ -187,7 +187,7 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
             FileUtils.write(new File(distDir, "src/test/java/TestAll.java"), vwriter.toString(), TisUTF8.get());
             // pom.xml
             final String resourcePath = "src/main/resources/";
-            FileUtils.write(new File(distDir, resourcePath+"description.md"), "Add Plugin Description", TisUTF8.get());
+            FileUtils.write(new File(distDir, resourcePath + "description.md"), "Add Plugin Description", TisUTF8.get());
             // 生成 Java类目
 
             for (ExtendPlugin extend : extendPlugins) {
