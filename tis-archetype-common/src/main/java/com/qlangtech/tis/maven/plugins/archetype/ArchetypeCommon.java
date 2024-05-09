@@ -1,5 +1,6 @@
 package com.qlangtech.tis.maven.plugins.archetype;
 
+import com.qlangtech.tis.manage.common.Config.SysDBType;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class ArchetypeCommon {
         System.setProperty(Config.KEY_ASSEMBLE_HOST, Config.KEY_ASSEMBLE_HOST);
         System.setProperty(Config.KEY_RUNTIME, RunEnvironment.DAILY.getKeyName());
         System.setProperty(Config.KEY_TIS_HOST, Config.KEY_TIS_HOST);
-        System.setProperty(Config.KEY_TIS_DATASOURCE_TYPE, Config.DB_TYPE_DERBY);
+        System.setProperty(Config.KEY_TIS_DATASOURCE_TYPE, SysDBType.DERBY.getToken());
         System.setProperty(Config.KEY_TIS_DATASOURCE_DBNAME, "tis_console_db");
     }
 
