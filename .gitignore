@@ -1,6 +1,6 @@
 #maven
 target
-
+**/.flattened-pom.xml
 #idea
 *.iml
 .idea
