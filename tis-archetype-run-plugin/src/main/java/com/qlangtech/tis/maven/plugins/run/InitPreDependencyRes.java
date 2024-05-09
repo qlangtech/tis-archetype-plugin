@@ -46,7 +46,7 @@ public class InitPreDependencyRes {
         File pkgFile = new File(tmpDir, pkg.repoPkgName);
         URL pkgUrl = null;
         if (!pkgFile.exists()) {
-            pkgUrl = UpdateCenterResource.getTISTarPkg(tisVersion, pkg.repoPkgName);
+            pkgUrl = UpdateCenterResource.getTISTarPkg(pkg.repoPkgName);
             HttpUtils.get(pkgUrl, new StreamProcess<Void>() {
                 @Override
                 public Void p(int status, InputStream stream, Map<String, List<String>> headerFields) {
@@ -56,7 +56,8 @@ public class InitPreDependencyRes {
             });
         }
         File localDir = new File(getTisUberDir(), pkg.localPkgName);
-        if (!localDir.exists()) {
+        File cpSuccessToken = new File(localDir,"cp_success");
+        if (!localDir.exists() || !cpSuccessToken.exists()) {
 
             TarArchiveEntry entry = null;
             File targetFile = null;
@@ -70,12 +71,11 @@ public class InitPreDependencyRes {
 
                     write2file(tarInput, targetFile);
                 }
+                FileUtils.touch(cpSuccessToken);
                 log.info("download:" + pkgUrl + " to local dir:" + localDir);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
-
         }
     }
 
