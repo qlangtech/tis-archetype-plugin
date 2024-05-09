@@ -31,8 +31,9 @@ public class ArchetypeCommon {
         try {
             tmpDir = (new File(FileUtils.getUserDirectory(), "tis_tmp"));
             // tmpDir = ;
-            FileUtils.forceMkdir(tmpDir);
-            Config.setDataDir(new File(tmpDir, UBER_DATA_DIR + "/data").getAbsolutePath());
+            File tmpDataDir = new File(tmpDir, UBER_DATA_DIR + "/data");
+            FileUtils.forceMkdir(tmpDataDir);
+            Config.setDataDir(tmpDataDir.getAbsolutePath());
             //  FileUtils.forceMkdir(new File(Config.getLibDir(), com.qlangtech.tis.TIS.KEY_TIS_PLUGIN_ROOT));
         } catch (IOException e) {
             throw new RuntimeException(e);
