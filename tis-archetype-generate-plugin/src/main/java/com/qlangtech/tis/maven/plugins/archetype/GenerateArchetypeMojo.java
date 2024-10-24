@@ -1,19 +1,22 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package com.qlangtech.tis.maven.plugins.archetype;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.ContextEnabled;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
-import org.apache.maven.plugins.annotations.Execute;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,8 +29,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
-import org.codehaus.plexus.velocity.VelocityComponent;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -42,8 +43,23 @@ import com.qlangtech.tis.manage.common.ConfigFileContext.StreamProcess;
 import com.qlangtech.tis.manage.common.HttpUtils;
 import com.qlangtech.tis.manage.common.TisUTF8;
 import com.qlangtech.tis.plugin.PluginCategory;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.ContextEnabled;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.velocity.VelocityContext;
+import org.codehaus.plexus.velocity.VelocityComponent;
 
-//import org.codehaus.plexus.component.annotations.Component;
+// import org.codehaus.plexus.component.annotations.Component;
 
 /**
  * 生成TIS 插件的骨架代码
@@ -77,7 +93,6 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
     public void execute() throws MojoExecutionException, MojoFailureException {
         ArchetypeCommon.initSysParams();
 
-
         File tmpDir = ArchetypeCommon.getTmpDir();
         ArchetypeProject projectModel = getProjectModel();
         List<ExtendPlugin> extendPlugins = projectModel.getExtendPlugins();
@@ -93,11 +108,9 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
             throw new RuntimeException(e);
         }
 
-
         Map<String, ExtendPluginMeta> categoryMetas = getCategoryPluginMeta(tmpDir);
         ExtendPluginMeta pluginMeta = null;
         List<Plugin> plugins = updateSite.getPlugins((p) -> true);
-
 
         for (ExtendPlugin extend : extendPlugins) {
 
@@ -107,7 +120,6 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                 extend.setPluginMeta(pluginMeta);
 
             } else {
-
 
                 find:
                 for (Plugin plugin : plugins) {
@@ -126,28 +138,24 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                             //     3. 不属于任何
                             // 不在，将本Plugin作为依赖
 
-
                             break find;
                         }
                         match = CollectionUtils.exists(entry.getValue(), (impl) -> {
-                                    boolean equal = StringUtils.equals((String) impl, extend.extend);
-                                    if (equal) {
-                                        IPluginCoord coord = plugin.getTargetCoord(Optional.empty());
-                                        // coord.getDownloadUrl();
-                                        ExtendPluginMeta meta = new ExtendPluginMeta(extend.extend, PluginCategory.NONE);
-                                        meta.gav = Optional.of(coord.getGav());
-                                        extend.setPluginMeta(meta);
-                                    }
-                                    return equal;
-                                }
-                        );
-
+                            boolean equal = StringUtils.equals((String) impl, extend.extend);
+                            if (equal) {
+                                IPluginCoord coord = plugin.getTargetCoord(Optional.empty());
+                                // coord.getDownloadUrl();
+                                ExtendPluginMeta meta = new ExtendPluginMeta(extend.extend, PluginCategory.NONE);
+                                meta.gav = Optional.of(coord.getGav());
+                                extend.setPluginMeta(meta);
+                            }
+                            return equal;
+                        });
                     }
 
                     if (match) {
                         break find;
                     }
-
                 }
             }
 
@@ -158,14 +166,14 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
         projectModel.validate();
         // 开始生成
 
-        File distDir = projectModel.getDistDir();// new File(new File("."), projectModel.getNewProjectName());
+        File distDir = projectModel.getDistDir(); // new File(new File("."), projectModel.getNewProjectName());
         try {
             if (distDir.exists()) {
-                throw new MojoExecutionException("dist dir:" + distDir.getAbsolutePath() + " is exist can not create again");
+                throw new MojoExecutionException(
+                        "dist dir:" + distDir.getAbsolutePath() + " is exist can not create again");
             } else {
                 FileUtils.forceMkdir(distDir);
             }
-
 
             // pom.xml
             VelocityContext mergeData = projectModel.createVelocityContext();
@@ -187,7 +195,8 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
             FileUtils.write(new File(distDir, "src/test/java/TestAll.java"), vwriter.toString(), TisUTF8.get());
             // pom.xml
             final String resourcePath = "src/main/resources/";
-            FileUtils.write(new File(distDir, resourcePath + "description.md"), "Add Plugin Description", TisUTF8.get());
+            FileUtils.write(
+                    new File(distDir, resourcePath + "description.md"), "Add Plugin Description", TisUTF8.get());
             // 生成 Java类目
 
             for (ExtendPlugin extend : extendPlugins) {
@@ -198,7 +207,10 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                 vwriter = new StringWriter();
                 templateName = "/template/java/plugin.java.vm";
                 velocity.getEngine().mergeTemplate(templateName, TisUTF8.getName(), mergeData, vwriter);
-                FileUtils.write(new File(distDir, "src/main/java/" + newClassInfo.getFullClazzRelativePath()), vwriter.toString(), TisUTF8.get());
+                FileUtils.write(
+                        new File(distDir, "src/main/java/" + newClassInfo.getFullClazzRelativePath()),
+                        vwriter.toString(),
+                        TisUTF8.get());
                 //  System.out.println(vwriter.toString());
 
                 // 生成对应的Test类
@@ -206,12 +218,19 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                 vwriter = new StringWriter();
                 templateName = "/template/java/test-plugin.java.vm";
                 velocity.getEngine().mergeTemplate(templateName, TisUTF8.getName(), mergeData, vwriter);
-                FileUtils.write(new File(distDir, "src/test/java/" + newTestClassInfo.getFullClazzRelativePath()), vwriter.toString(), TisUTF8.get());
+                FileUtils.write(
+                        new File(distDir, "src/test/java/" + newTestClassInfo.getFullClazzRelativePath()),
+                        vwriter.toString(),
+                        TisUTF8.get());
 
                 // 生成props json
-                FileUtils.write(new File(distDir, resourcePath + newClassInfo.getFullRelativePath("json")), "{\n}", TisUTF8.get());
+                FileUtils.write(
+                        new File(distDir, resourcePath + newClassInfo.getFullRelativePath("json")),
+                        "{\n}",
+                        TisUTF8.get());
                 // 生成props md
-                FileUtils.write(new File(distDir, resourcePath + newClassInfo.getFullRelativePath("md")), "", TisUTF8.get());
+                FileUtils.write(
+                        new File(distDir, resourcePath + newClassInfo.getFullRelativePath("md")), "", TisUTF8.get());
             }
 
             // 生成 Resources文件
@@ -220,40 +239,41 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
         }
 
         // 生成 Test类骨架
-//        for (ExtendPlugin extend : extendPlugins) {
-//            mergeData = extend.createVelocityContext();
-//
-//        }
+        //        for (ExtendPlugin extend : extendPlugins) {
+        //            mergeData = extend.createVelocityContext();
+        //
+        //        }
 
     }
 
-
-//    public static final String UBER_DATA_DIR = "uber-data";
-//
-//    public static File getTmpDir() {
-//        File tmpDir = null;
-//        try {
-//            tmpDir = (new File(FileUtils.getUserDirectory(), "tis_tmp"));
-//            // tmpDir = ;
-//            FileUtils.forceMkdir(tmpDir);
-//            Config.setDataDir(new File(tmpDir, UBER_DATA_DIR + "/data").getAbsolutePath());
-//            //  FileUtils.forceMkdir(new File(Config.getLibDir(), com.qlangtech.tis.TIS.KEY_TIS_PLUGIN_ROOT));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return tmpDir;
-//    }
-
+    //    public static final String UBER_DATA_DIR = "uber-data";
+    //
+    //    public static File getTmpDir() {
+    //        File tmpDir = null;
+    //        try {
+    //            tmpDir = (new File(FileUtils.getUserDirectory(), "tis_tmp"));
+    //            // tmpDir = ;
+    //            FileUtils.forceMkdir(tmpDir);
+    //            Config.setDataDir(new File(tmpDir, UBER_DATA_DIR + "/data").getAbsolutePath());
+    //            //  FileUtils.forceMkdir(new File(Config.getLibDir(), com.qlangtech.tis.TIS.KEY_TIS_PLUGIN_ROOT));
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        }
+    //        return tmpDir;
+    //    }
 
     Map<String, ExtendPluginMeta> getCategoryPluginMeta(File dataDir) {
 
-        return HttpUtils.get((UpdateCenterResource.getTISReleaseRes(
-                tisVersion, UpdateCenterResource.KEY_UPDATE_SITE, UpdateCenter.PLUGIN_CATEGORIES_FILENAME))
-                , new StreamProcess<Map<String, ExtendPluginMeta>>() {
+        return HttpUtils.get(
+                (UpdateCenterResource.getTISReleaseRes(
+                        tisVersion, UpdateCenterResource.KEY_UPDATE_SITE, UpdateCenter.PLUGIN_CATEGORIES_FILENAME)),
+                new StreamProcess<Map<String, ExtendPluginMeta>>() {
                     @Override
-                    public Map<String, ExtendPluginMeta> p(int status, InputStream stream, Map<String, List<String>> headerFields) {
+                    public Map<String, ExtendPluginMeta> p(
+                            int status, InputStream stream, Map<String, List<String>> headerFields) {
 
-                        File categoryFile = new File(dataDir, tisVersion + "/" + UpdateCenter.PLUGIN_CATEGORIES_FILENAME);
+                        File categoryFile =
+                                new File(dataDir, tisVersion + "/" + UpdateCenter.PLUGIN_CATEGORIES_FILENAME);
                         if (!categoryFile.exists()) {
                             try (FileOutputStream out = FileUtils.openOutputStream(categoryFile)) {
                                 IOUtils.copy(stream, out);
@@ -266,7 +286,8 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
                         try {
 
                             PluginCategory category = null;
-                            JSONObject body = JSONObject.parseObject(FileUtils.readFileToString(categoryFile, TisUTF8.get()));
+                            JSONObject body =
+                                    JSONObject.parseObject(FileUtils.readFileToString(categoryFile, TisUTF8.get()));
                             JSONArray metas = null;
                             JSONObject meta = null;
                             ExtendPluginMeta pluginMeta = null;
@@ -290,14 +311,10 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
 
                         return result;
                     }
-                }
-        );
-
+                });
     }
 
-    public static void main(String[] args) {
-
-    }
+    public static void main(String[] args) {}
 
     public static class ExtendPluginMeta {
         private final String describleClass;
@@ -318,5 +335,4 @@ public class GenerateArchetypeMojo extends AbstractMojo implements ContextEnable
             return this.descriptorClass;
         }
     }
-
 }

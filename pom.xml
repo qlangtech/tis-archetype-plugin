@@ -1,378 +1,366 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.maven</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>43</version>
+    <relativePath />
+  </parent>
 
+  <groupId>com.qlangtech.tis</groupId>
+  <artifactId>tis-archetype-plugin</artifactId>
+  <version>${revision}</version>
+  <!--    <packaging>maven-plugin</packaging>-->
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-parent</artifactId>
-        <version>34</version>
-        <relativePath/>
-    </parent>
+  <url>http://maven.apache.org</url>
 
-    <modules>
-        <module>tis-archetype-run-plugin</module>
-        <module>tis-archetype-generate-plugin</module>
-        <module>tis-archetype-common</module>
-    </modules>
+  <modules>
+    <module>tis-archetype-run-plugin</module>
+    <module>tis-archetype-generate-plugin</module>
+    <module>tis-archetype-common</module>
+  </modules>
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <url>oss://maven.qlangtech.com/release</url>
+    </repository>
+  </distributionManagement>
 
-    <groupId>com.qlangtech.tis</groupId>
-    <artifactId>tis-archetype-plugin</artifactId>
-    <version>${revision}</version>
+  <properties>
+    <javaVersion>11</javaVersion>
+    <rat.skip>true</rat.skip>
+    <checkstyle.skip>true</checkstyle.skip>
+    <mavenVersion>3.0</mavenVersion>
+    <maven.plugin.version>3.2.1</maven.plugin.version>
+    <revision>4.1.0</revision>
+  </properties>
 
-
-    <url>http://maven.apache.org</url>
-    <!--    <packaging>maven-plugin</packaging>-->
-    <packaging>pom</packaging>
-
-
-    <properties>
-        <javaVersion>8</javaVersion>
-        <rat.skip>true</rat.skip>
-        <checkstyle.skip>true</checkstyle.skip>
-        <mavenVersion>3.0</mavenVersion>
-        <maven.plugin.version>3.2.1</maven.plugin.version>
-        <revision>4.1.0</revision>
-    </properties>
+  <dependencyManagement>
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>com.qlangtech.tis</groupId>-->
-        <!--            <artifactId>tis-plugin</artifactId>-->
-        <!--            <version>${tis.version}</version>-->
-        <!--        </dependency>-->
-        <dependency>
-            <groupId>com.qlangtech.tis</groupId>
-            <artifactId>tis-web-start</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-settings</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-compat</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.plexus</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+      <dependency>
+        <groupId>com.qlangtech.tis</groupId>
+        <artifactId>tis-archetype-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.maven.archetype</groupId>-->
-        <!--            <artifactId>archetype-catalog</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.maven.archetype</groupId>-->
-        <!--            <artifactId>archetype-descriptor</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.maven.archetype</groupId>-->
-        <!--            <artifactId>archetype-common</artifactId>-->
-        <!--        </dependency>-->
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-archiver</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-        <dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-compat</artifactId>
+        <version>${mavenVersion}</version>
+      </dependency>
+
+      <!--            <dependency>-->
+      <!--                <groupId>org.apache.maven.archetype</groupId>-->
+      <!--                <artifactId>archetype-descriptor</artifactId>-->
+      <!--                <version>${maven.plugin.version}</version>-->
+      <!--            </dependency>-->
+      <!--            <dependency>-->
+      <!--                <groupId>org.apache.maven.archetype</groupId>-->
+      <!--                <artifactId>archetype-common</artifactId>-->
+      <!--                <version>${maven.plugin.version}</version>-->
+      <!--            </dependency>-->
+      <!--            <dependency>-->
+      <!--                <groupId>org.apache.maven.archetype</groupId>-->
+      <!--                <artifactId>archetype-packaging</artifactId>-->
+      <!--                <version>${maven.plugin.version}</version>-->
+      <!--            </dependency>-->
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-artifact</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-core</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-model</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-settings</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-settings-builder</artifactId>
+        <version>${mavenVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.shared</groupId>
+        <artifactId>maven-invoker</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.shared</groupId>
+        <artifactId>maven-artifact-transfer</artifactId>
+        <version>0.13.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-utils</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-interactivity-api</artifactId>
+        <version>1.1</version>
+        <exclusions>
+          <exclusion>
             <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-archiver</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-        <!-- Required for the integration tests, dependency is only to define build order -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.maven.archetype</groupId>-->
-        <!--            <artifactId>archetype-packaging</artifactId>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-        <dependency>
+            <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-velocity</artifactId>
+        <version>1.2</version>
+        <exclusions>
+          <exclusion>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>velocity</groupId>
+            <artifactId>velocity-api</artifactId>
+          </exclusion>
+          <exclusion>
             <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-interactivity-api</artifactId>
-        </dependency>
-        <!-- dependencies to annotations -->
-        <dependency>
-            <groupId>org.apache.maven.plugin-tools</groupId>
-            <artifactId>maven-plugin-annotations</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-component-annotations</artifactId>
-        </dependency>
+            <artifactId>plexus-container-default</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.jdom</groupId>
+        <artifactId>jdom2</artifactId>
+        <version>2.0.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+        <version>1.7</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugin-testing</groupId>
+        <artifactId>maven-plugin-testing-harness</artifactId>
+        <version>2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.aether</groupId>
+        <artifactId>aether-api</artifactId>
+        <version>1.7</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.aether</groupId>
+        <artifactId>aether-impl</artifactId>
+        <version>1.7</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.aether</groupId>
+        <artifactId>aether-spi</artifactId>
+        <version>1.7</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.aether</groupId>
+        <artifactId>aether-connector-file</artifactId>
+        <version>1.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.aether</groupId>
+        <artifactId>aether-connector-wagon</artifactId>
+        <version>1.7</version>
+      </dependency>
 
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-invoker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-artifact-transfer</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>3.6</version>
-            <scope>test</scope>
-        </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-matchers</artifactId>
+        <version>2.6.4</version>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.qlangtech.tis</groupId>
+      <artifactId>tis-web-start</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-artifact</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-settings</artifactId>
+    </dependency>
 
-    <dependencyManagement>
-        <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-compat</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-            <dependency>
-                <groupId>com.qlangtech.tis</groupId>
-                <artifactId>tis-archetype-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+    <!--        <dependency>-->
+    <!--            <groupId>org.apache.maven.archetype</groupId>-->
+    <!--            <artifactId>archetype-catalog</artifactId>-->
+    <!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.apache.maven.archetype</groupId>-->
+    <!--            <artifactId>archetype-descriptor</artifactId>-->
+    <!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.apache.maven.archetype</groupId>-->
+    <!--            <artifactId>archetype-common</artifactId>-->
+    <!--        </dependency>-->
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-archiver</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-archiver</artifactId>
+      <version>4.2.2</version>
+    </dependency>
+    <!-- Required for the integration tests, dependency is only to define build order -->
+    <!--        <dependency>-->
+    <!--            <groupId>org.apache.maven.archetype</groupId>-->
+    <!--            <artifactId>archetype-packaging</artifactId>-->
+    <!--            <scope>test</scope>-->
+    <!--        </dependency>-->
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-interactivity-api</artifactId>
+    </dependency>
+    <!-- dependencies to annotations -->
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--        <dependency>-->
+    <!--            <groupId>org.codehaus.plexus</groupId>-->
+    <!--            <artifactId>plexus-component-annotations</artifactId>-->
+    <!--        </dependency>-->
 
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-compat</artifactId>
-                <version>${mavenVersion}</version>
-            </dependency>
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-invoker</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-artifact-transfer</artifactId>
+    </dependency>
 
-            <!--            <dependency>-->
-            <!--                <groupId>org.apache.maven.archetype</groupId>-->
-            <!--                <artifactId>archetype-descriptor</artifactId>-->
-            <!--                <version>${maven.plugin.version}</version>-->
-            <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>org.apache.maven.archetype</groupId>-->
-            <!--                <artifactId>archetype-common</artifactId>-->
-            <!--                <version>${maven.plugin.version}</version>-->
-            <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>org.apache.maven.archetype</groupId>-->
-            <!--                <artifactId>archetype-packaging</artifactId>-->
-            <!--                <version>${maven.plugin.version}</version>-->
-            <!--            </dependency>-->
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-artifact</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-core</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-model</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-plugin-api</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-settings</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-settings-builder</artifactId>
-                <version>${mavenVersion}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.shared</groupId>
-                <artifactId>maven-invoker</artifactId>
-                <version>3.0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.shared</groupId>
-                <artifactId>maven-artifact-transfer</artifactId>
-                <version>0.13.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-utils</artifactId>
-                <version>3.3.0</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-interactivity-api</artifactId>
-                <version>1.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-velocity</artifactId>
-                <version>1.2</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>velocity</groupId>
-                        <artifactId>velocity</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>velocity</groupId>
-                        <artifactId>velocity-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-container-default</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.jdom</groupId>
-                <artifactId>jdom2</artifactId>
-                <version>2.0.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.7</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.plugin-testing</groupId>
-                <artifactId>maven-plugin-testing-harness</artifactId>
-                <version>2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.aether</groupId>
-                <artifactId>aether-api</artifactId>
-                <version>1.7</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.aether</groupId>
-                <artifactId>aether-impl</artifactId>
-                <version>1.7</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.aether</groupId>
-                <artifactId>aether-spi</artifactId>
-                <version>1.7</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.aether</groupId>
-                <artifactId>aether-connector-file</artifactId>
-                <version>1.7</version>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.aether</groupId>
-                <artifactId>aether-connector-wagon</artifactId>
-                <version>1.7</version>
-            </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+    </dependency>
 
-            <dependency>
-                <groupId>org.xmlunit</groupId>
-                <artifactId>xmlunit-matchers</artifactId>
-                <version>2.6.4</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>oss://maven.qlangtech.com/release</url>
-        </repository>
-    </distributionManagement>
-    <build>
-        <extensions>
-            <extension>
-                <groupId>com.qlangtech.maven.cloud</groupId>
-                <artifactId>oss-storage-wagon</artifactId>
-                <version>3.1.0</version>
-            </extension>
-        </extensions>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>3.6</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+            <phase>process-resources</phase>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <phase>clean</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>com.qlangtech.maven.cloud</groupId>
+        <artifactId>oss-storage-wagon</artifactId>
+        <version>3.1.0</version>
+      </extension>
+    </extensions>
+  </build>
 
 </project>

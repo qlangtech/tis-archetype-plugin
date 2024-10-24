@@ -1,7 +1,22 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package com.qlangtech.tis.maven.plugins.archetype;
-
-import org.apache.commons.compress.utils.Lists;
-import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.util.List;
@@ -13,6 +28,8 @@ import java.util.regex.Pattern;
 import com.google.inject.internal.util.Sets;
 import com.qlangtech.tis.maven.plugins.archetype.GenerateArchetypeMojo.ExtendPluginMeta;
 import com.qlangtech.tis.plugin.PluginCategory;
+import org.apache.commons.compress.utils.Lists;
+import org.apache.velocity.VelocityContext;
 
 /**
  * @author: 百岁（baisui@qlangtech.com）
@@ -63,7 +80,8 @@ public class ArchetypeProject {
             }
             Matcher matcher = pattern.matcher(archetypeMojo.artifactId);
             if (!matcher.matches()) {
-                throw new IllegalStateException("artifactId:" + archetypeMojo.artifactId + " is invalid, shall be pattern of:" + pattern);
+                throw new IllegalStateException(
+                        "artifactId:" + archetypeMojo.artifactId + " is invalid, shall be pattern of:" + pattern);
             }
         }
         // }
@@ -81,13 +99,14 @@ public class ArchetypeProject {
             PluginCategory cat = this.getCategory();
             switch (cat) {
                 case BATCH:
-//        <groupId>com.qlangtech.tis.plugins</groupId>
-//        <artifactId>tis-datax</artifactId>
-//        <version>${data.projectVersion}</version>
+                    //        <groupId>com.qlangtech.tis.plugins</groupId>
+                    //        <artifactId>tis-datax</artifactId>
+                    //        <version>${data.projectVersion}</version>
                     this.parentPomArtifact = Coord.parse("com.qlangtech.tis.plugins:tis-datax:" + getProjectVersion());
                     break;
                 case NONE:
-                    this.parentPomArtifact = Coord.parse("com.qlangtech.tis.plugins:tis-plugin-parent:" + getProjectVersion());
+                    this.parentPomArtifact =
+                            Coord.parse("com.qlangtech.tis.plugins:tis-plugin-parent:" + getProjectVersion());
                     break;
                 case INCR:
                     this.parentPomArtifact = Coord.parse("com.qlangtech.tis.plugins:tis-incr:" + getProjectVersion());
@@ -150,10 +169,10 @@ public class ArchetypeProject {
     public VelocityContext createVelocityContext() {
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("data", this);
-//        velocityContext.put(DataxUtils.DATAX_NAME, this.dataxName);
-//        velocityContext.put("reader", reader);
-//        velocityContext.put("writer", writer);
-//        velocityContext.put("cfg", this.globalCfg);
+        //        velocityContext.put(DataxUtils.DATAX_NAME, this.dataxName);
+        //        velocityContext.put("reader", reader);
+        //        velocityContext.put("writer", writer);
+        //        velocityContext.put("cfg", this.globalCfg);
         return velocityContext;
     }
 }

@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>tis-archetype-plugin</artifactId>
-        <groupId>com.qlangtech.tis</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
     <groupId>com.qlangtech.tis</groupId>
-    <artifactId>tis-archetype-common</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>tis-archetype-plugin</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
+  <groupId>com.qlangtech.tis</groupId>
+  <artifactId>tis-archetype-common</artifactId>
+  <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.qlangtech.tis</groupId>
-            <artifactId>tis-builder-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.qlangtech.tis</groupId>
+      <artifactId>tis-builder-api</artifactId>
+      <version>${revision}</version>
+    </dependency>
+  </dependencies>
 </project>
