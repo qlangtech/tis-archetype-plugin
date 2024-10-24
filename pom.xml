@@ -34,7 +34,7 @@
         <checkstyle.skip>true</checkstyle.skip>
         <mavenVersion>3.0</mavenVersion>
         <maven.plugin.version>3.2.1</maven.plugin.version>
-        <revision>4.0.0</revision>
+        <revision>4.1.0</revision>
     </properties>
     <dependencies>
         <!--        <dependency>-->

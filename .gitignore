@@ -10,7 +10,7 @@ target
 .classpath
 .settings
 .checkstyle
-
+.flattened-pom.xml
 # OSX
 .DS_Store
 
