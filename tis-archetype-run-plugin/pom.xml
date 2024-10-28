@@ -12,7 +12,18 @@
   <artifactId>tis-archetype-run-plugin</artifactId>
   <packaging>maven-plugin</packaging>
 
+  <properties>
+    <maven-resolver.version>2.0.2</maven-resolver.version>
+  </properties>
+
   <dependencies>
+
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+
     <dependency>
       <groupId>com.qlangtech.tis</groupId>
       <artifactId>tis-manage-pojo</artifactId>
@@ -22,6 +33,28 @@
     <dependency>
       <groupId>com.qlangtech.tis</groupId>
       <artifactId>tis-archetype-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci</groupId>
+      <artifactId>version-number</artifactId>
+      <version>1.9</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven.resolver</groupId>
+      <artifactId>maven-resolver-api</artifactId>
+      <version>${maven-resolver.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.resolver</groupId>
+      <artifactId>maven-resolver-util</artifactId>
+      <version>${maven-resolver.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.twdata.maven</groupId>
+      <artifactId>mojo-executor</artifactId>
+      <version>2.4.0</version>
     </dependency>
 
   </dependencies>
@@ -33,6 +66,20 @@
         <configuration>
           <goalPrefix>tis</goalPrefix>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.sisu</groupId>
+        <artifactId>sisu-maven-plugin</artifactId>
+        <version>0.3.5</version>
+        <executions>
+          <execution>
+            <id>generate-index</id>
+            <goals>
+              <goal>main-index</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -7,7 +7,7 @@
     <version>43</version>
     <relativePath />
   </parent>
-
+  <!--ref: https://github.com/jenkinsci/maven-hpi-plugin-->
   <groupId>com.qlangtech.tis</groupId>
   <artifactId>tis-archetype-plugin</artifactId>
   <version>${revision}</version>
@@ -32,9 +32,9 @@
     <javaVersion>11</javaVersion>
     <rat.skip>true</rat.skip>
     <checkstyle.skip>true</checkstyle.skip>
-    <mavenVersion>3.0</mavenVersion>
+    <mavenVersion>3.8.1</mavenVersion>
     <maven.plugin.version>3.2.1</maven.plugin.version>
-    <revision>4.1.0</revision>
+    <revision>4.1.0-SNAPSHOT</revision>
   </properties>
 
   <dependencyManagement>
@@ -118,11 +118,11 @@
         <artifactId>plexus-utils</artifactId>
         <version>3.3.0</version>
       </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.6</version>
-      </dependency>
+      <!--      <dependency>-->
+      <!--        <groupId>commons-io</groupId>-->
+      <!--        <artifactId>commons-io</artifactId>-->
+      <!--        <version>2.6</version>-->
+      <!--      </dependency>-->
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-interactivity-api</artifactId>
