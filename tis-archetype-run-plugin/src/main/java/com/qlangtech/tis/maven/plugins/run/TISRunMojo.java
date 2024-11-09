@@ -27,10 +27,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 
 import com.google.common.collect.Lists;
 import com.qlangtech.tis.extension.PluginManager;
+import com.qlangtech.tis.extension.PluginStrategy;
 import com.qlangtech.tis.manage.common.Config;
 import com.qlangtech.tis.maven.plugins.archetype.ArchetypeCommon;
 import com.qlangtech.tis.maven.plugins.run.InitPreDependencyRes.SubContext;
@@ -221,12 +223,14 @@ public class TISRunMojo extends AbstractMojo {
             return new VersionNumber("0.0");
         }
         try (JarFile j = new JarFile(p)) {
-            String v = j.getManifest().getMainAttributes().getValue("Plugin-Version");
+            Attributes attrs = j.getManifest().getMainAttributes();
+
+            String v = attrs.getValue("Plugin-Version");
             if (v == null) {
                 throw new IOException("no Plugin-Version in " + p);
             }
             try {
-                return new VersionNumber(v);
+                return new TISVersionNumber(v, Long.parseLong(attrs.getValue(PluginStrategy.KEY_LAST_MODIFY_TIME)));
             } catch (IllegalArgumentException x) {
                 throw new IOException("malformed Plugin-Version in " + p + ": " + x, x);
             }
@@ -275,6 +279,7 @@ public class TISRunMojo extends AbstractMojo {
                         MojoExecutor.groupId("com.qlangtech.tis"), MojoExecutor.artifactId("maven-tpi-plugin")),
                 MojoExecutor.goal("hpl"),
                 MojoExecutor.configuration(
+                       // MojoExecutor.element("classpathDependentExcludes",);
                         MojoExecutor.element(MojoExecutor.name("tisDataDir"), tisDataDir),
                         MojoExecutor.element(MojoExecutor.name("pluginName"), project.getName()),
                         MojoExecutor.element(MojoExecutor.name("warSourceDirectory"), warSourceDirectory.toString()),
