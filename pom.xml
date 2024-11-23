@@ -39,6 +39,7 @@
     <mavenVersion>3.9.9</mavenVersion>
     <maven.plugin.version>3.2.1</maven.plugin.version>
     <revision>4.1.0-SNAPSHOT</revision>
+<!--    <revision>4.0.1</revision>-->
   </properties>
 
   <dependencyManagement>
