@@ -36,6 +36,7 @@ import com.qlangtech.tis.extension.PluginStrategy;
 import com.qlangtech.tis.manage.common.Config;
 import com.qlangtech.tis.maven.plugins.archetype.ArchetypeCommon;
 import com.qlangtech.tis.maven.plugins.run.InitPreDependencyRes.SubContext;
+import com.qlangtech.tis.solrj.util.ZkUtils;
 import com.qlangtech.tis.web.start.TISAppClassLoader;
 import com.qlangtech.tis.web.start.TisApp;
 import com.qlangtech.tis.web.start.TisAppLaunch;
@@ -129,6 +130,10 @@ public class TISRunMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         ArchetypeCommon.initSysParams();
         getProject().setArtifacts(resolveDependencies(dependencyResolution));
+        ZkUtils.localhostValidator = (ip) -> {
+            // 不进行地址是否是127.0.0.1的校验
+            return;
+        };
         initPreDependencyRes();
 
         File pluginsDir = new File(Config.getDataDir(), Config.LIB_PLUGINS_PATH);
@@ -279,7 +284,7 @@ public class TISRunMojo extends AbstractMojo {
                         MojoExecutor.groupId("com.qlangtech.tis"), MojoExecutor.artifactId("maven-tpi-plugin")),
                 MojoExecutor.goal("hpl"),
                 MojoExecutor.configuration(
-                       // MojoExecutor.element("classpathDependentExcludes",);
+                        // MojoExecutor.element("classpathDependentExcludes",);
                         MojoExecutor.element(MojoExecutor.name("tisDataDir"), tisDataDir),
                         MojoExecutor.element(MojoExecutor.name("pluginName"), project.getName()),
                         MojoExecutor.element(MojoExecutor.name("warSourceDirectory"), warSourceDirectory.toString()),
