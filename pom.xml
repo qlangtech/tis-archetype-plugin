@@ -363,7 +363,7 @@
       <extension>
         <groupId>com.qlangtech.maven.cloud</groupId>
         <artifactId>oss-storage-wagon</artifactId>
-        <version>4.1.0</version>
+        <version>4.2.0</version>
       </extension>
     </extensions>
   </build>
